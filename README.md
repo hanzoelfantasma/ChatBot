@@ -3,10 +3,18 @@
 
 - PHP 8.0 o superior
 - SQLite
+- [Composer](https://getcomposer.org/).
 
 Se debe establecer el nginx o apache a la carpeta public del proyecto.
 
-La base de datos se encuentra database/database.sqlite
+La base de datos se encuentra database/database.sqlite.
+
+Antes de iniciar el proyecto se deben instalar las librerías con: 
+- composer install
+
+Para desplegar y ejecutar en desarrollo ubicarse en la carpeta root del proyecto y ejecutar:
+- php artisan serve
+
 
 ## Laravel
 
