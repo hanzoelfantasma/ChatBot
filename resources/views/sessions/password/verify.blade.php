@@ -19,8 +19,8 @@
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Reset password</h4>
-                                    <p class='text-light p-2'>You will receive an e-mail in maximum 60 seconds</p>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Restablecer contraseña</h4>
+                                    <p class='text-light p-2'>Recibirá un e-mail en un lapso de 60 segundos</p>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -64,12 +64,12 @@
                                     @enderror
                                     <div class="text-center">
                                         <button type="submit"
-                                            class="btn bg-gradient-primary w-100 my-4 mb-2">Send</button>
+                                            class="btn bg-gradient-primary w-100 my-4 mb-2">Enviar</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
+                                        ¿ No tiene cuenta ?
                                         <a href="{{ route('register') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                            class="text-primary text-gradient font-weight-bold">Registrarse</a>
                                     </p>
                                 </form>
                             </div>
@@ -84,7 +84,7 @@
     <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
     <script>
         $(function() {
-    
+
         var text_val = $(".input-group input").val();
         if (text_val === "") {
           $(".input-group").removeClass('is-filled');

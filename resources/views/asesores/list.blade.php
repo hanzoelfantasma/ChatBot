@@ -5,6 +5,34 @@
         <x-navbars.navs.auth titlePage="Asesores"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
+                    {{session('error')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+                @if(session('success'))
+                    <div class="alert alert-danger alert-success fade show text-white" role="alert">
+                        {{session('success')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
@@ -47,16 +75,18 @@
                                             <td class="align-middle text-center text-sm">{{$asesor->estado}}</td>
                                             <td class="align-middle">
                                                 <a rel="tooltip" class="btn btn-success btn-link"
-                                                   href="" data-original-title=""
+                                                   href="{{url('asesores/edit/'.$asesor->id_asesor)}}" data-original-title=""
                                                    title="">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
-                                                <button type="button" class="btn btn-danger btn-link"
-                                                        data-original-title="" title="">
-                                                    <i class="material-icons">close</i>
-                                                    <div class="ripple-container"></div>
-                                                </button>
+                                                <form method="POST" action="{{url('asesores/delete/'.$asesor->id_asesor)}}">
+                                                    @csrf
+                                                    <button  rel="tooltip" class="btn btn-danger btn-link">
+                                                        <i class="material-icons">close</i>
+                                                        <div class="ripple-container"></div>
+                                                    </button>
+                                                </form>
                                             </td>
 
                                         </tr>

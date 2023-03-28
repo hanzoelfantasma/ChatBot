@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Asesores;
+use Illuminate\Support\Facades\Log;
+
 class AsesoresController extends Controller
 {
     /**
@@ -38,7 +40,8 @@ class AsesoresController extends Controller
     {
         $request->validate([
             'nombre_completo'=>['required','string'],
-            'celular'=>['required','numeric']
+            'celular'=>['required','numeric'],
+            'numero_documento'=>['required','numeric','unique:App\Models\Asesores,numero_documento']
         ]);
 
         $asesor= new Asesores();
@@ -68,7 +71,8 @@ class AsesoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asesor=Asesores::where('id_asesor',$id)->get();
+        return view('asesores.edit',compact('asesor'));
     }
 
     /**
@@ -78,9 +82,38 @@ class AsesoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'nombre_completo'=>['required','string'],
+            'celular'=>['required','numeric'],
+            'numero_documento'=>['required','numeric']
+        ]);
+        if(is_null($request->id_asesor)){
+            return back()->with('error','Se ha presentado un error por favor contacte al administrador');
+        }
+        try {
+            Asesores::where('id_asesor',$request->id_asesor)
+                ->update(
+                    [
+                        'nombre_completo'=>$request->nombre_completo,
+                        'celular'=>$request->celular,
+                        'numero_documento'=>$request->numero_documento
+                    ]);
+
+            return redirect('asesores')->with('success','Actualizado correctamente.');
+
+
+        }catch (\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error','Se ha presentado un error tratando de actualizar, por favor intente nuevamente.');
+
+        }
+
+
+
     }
 
     /**
@@ -91,6 +124,25 @@ class AsesoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(is_null($id)){
+            return back()->with('error','Se ha presentado un error por favor contacte al administrador');
+        }
+        try {
+            $asesor=Asesores::find($id);
+            if(is_null($asesor)){
+                return back()->with('error','El asesor que intente eliminar no existe en los registros');
+            }
+            $asesor->delete();
+            return redirect('asesores')->with('success','Eliminado correctamente.');
+
+        }catch (\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error','Se ha presentado un error tratando de actualizar, por favor intente nuevamente.');
+        }
+
+
+
+
+
     }
 }

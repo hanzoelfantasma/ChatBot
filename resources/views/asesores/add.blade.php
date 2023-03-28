@@ -15,21 +15,7 @@
                         <div class="card-body px-0 pb-2 container">
                             <form method="POST" action="{{route('asesores-store')}}">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Nombre Completo</label>
-                                            <input type="text" name="nombre_completo" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Celular</label>
-                                            <input type="tel" name="celular" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                @include('asesores.partials._form_add_edit',['btn'=>'Guardar'])
                             </form>
 
                         </div>

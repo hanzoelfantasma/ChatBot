@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asesores',[AsesoresController::class,'index'])->name('asesores');
     Route::get('asesores/create',[AsesoresController::class,'create'])->name('asesores-create');
     Route::post('asesores/store',[AsesoresController::class,'store'])->name('asesores-store');
+    Route::get('asesores/edit/{id}',[AsesoresController::class,'edit'])->name('asesores-edit');
+    Route::post('asesores/update',[AsesoresController::class,'update'])->name('asesores-update');
+    Route::post('asesores/delete/{id}',[AsesoresController::class,'destroy']);
 
 	Route::get('billing', function () {
 		return view('pages.billing');
